@@ -69,7 +69,7 @@ def create_curr_to_prev():
     print(num_no_prev)
             
 def main():
-	create_curr_to_prev()
-	
+    create_curr_to_prev()
+    
 if __name__ == '__main__':
-	main()
+    main()

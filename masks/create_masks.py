@@ -169,50 +169,50 @@ def create_gaussian_masks(img_id, img_name, img_path, visited):
         return np.shape(np_arr[:, :, 0])
         
 def main():
-	img_path = './Fish_automated_identification_and_counting/'
-	box_path = './box_masks/'
-	gauss_path = './gaussian_masks/'
+    img_path = './Fish_automated_identification_and_counting/'
+    box_path = './box_masks/'
+    gauss_path = './gaussian_masks/'
 
-	train_path = './luderick_seagrass_jack_evans_a.json'
-	val_path = './luderick_seagrass_jack_evans_b.json'
-	all_path = './luderick_seagrass_all.json'
+    train_path = './luderick_seagrass_jack_evans_a.json'
+    val_path = './luderick_seagrass_jack_evans_b.json'
+    all_path = './luderick_seagrass_all.json'
 
-	paths = [all_path]
+    paths = [all_path]
 
-	# Set of visited images (drawn on)
-	visited = set()
+    # Set of visited images (drawn on)
+    visited = set()
 
-	# dictionary from image ids to image filenames
-	ids_to_names = {}
-	    
-	# using each path for annotations, create ids to filenames dict
-	for ann_path in paths:
-	    with open(img_path + ann_path) as f:
-	        # dictionary containing COCO format annotations
-	        COCO_ann = f.read()
+    # dictionary from image ids to image filenames
+    ids_to_names = {}
+        
+    # using each path for annotations, create ids to filenames dict
+    for ann_path in paths:
+        with open(img_path + ann_path) as f:
+            # dictionary containing COCO format annotations
+            COCO_ann = f.read()
 
-	    COCO_ann = json.loads(COCO_ann)
-	    
-	    # Lists of dictionaries with image/annotation information
-	    img_info = COCO_ann["images"]
-	    annotations = COCO_ann["annotations"]
+        COCO_ann = json.loads(COCO_ann)
+        
+        # Lists of dictionaries with image/annotation information
+        img_info = COCO_ann["images"]
+        annotations = COCO_ann["annotations"]
 
-	    for img_dict in img_info:
-	        img_id = img_dict["id"]
-	        img_name = img_dict["file_name"]
-	        ids_to_names[img_id] = img_name
+        for img_dict in img_info:
+            img_id = img_dict["id"]
+            img_name = img_dict["file_name"]
+            ids_to_names[img_id] = img_name
 
-	    # For each annotation, get id, filename, and create a black-white 
-	    # and gaussian mask.
-	    for ann_dict in annotations:
-	        img_id = ann_dict["image_id"]
+        # For each annotation, get id, filename, and create a black-white 
+        # and gaussian mask.
+        for ann_dict in annotations:
+            img_id = ann_dict["image_id"]
 
-	        if img_id in ids_to_names:
-	            img_name = ids_to_names[img_id]
-	            create_box_masks(img_id, img_name, img_path, visited)
-	            # create_gaussian_masks(img_id, img_name, img_path, visited)
-	        else:
-	            print(img_id)
+            if img_id in ids_to_names:
+                img_name = ids_to_names[img_id]
+                create_box_masks(img_id, img_name, img_path, visited)
+                # create_gaussian_masks(img_id, img_name, img_path, visited)
+            else:
+                print(img_id)
 
 if __name__ == '__main__':
-	main()
+    main()
