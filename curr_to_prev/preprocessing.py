@@ -53,7 +53,7 @@ def create_curr_to_prev():
             
             if curr_six_digits - prev_six_digits not in [200, 1]:
                 curr_to_prev_filename[curr_img_name] = None
-                curr_to_prev_img_id[curr_img_name] = None
+                curr_to_prev_img_id[curr_img_id] = None
                 num_no_prev += 1
             else:
                 curr_to_prev_filename[curr_img_name] = prev_img_name
@@ -70,6 +70,6 @@ def create_curr_to_prev():
             
 def main():
     create_curr_to_prev()
-    
+
 if __name__ == '__main__':
     main()
